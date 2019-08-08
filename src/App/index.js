@@ -1,30 +1,9 @@
-import React from "react";
-import { ApolloClient } from "apollo-client";
-import { HttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-memory";
-
-import logo from "../logo.svg";
-import "./style.css";
-
+import React from 'react';
+import logo from '../logo.svg';
+import './style.css';
+import Profile from '../Profile';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return <Profile />;
 }
 
 export default App;
