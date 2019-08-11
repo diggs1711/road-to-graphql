@@ -162,7 +162,7 @@ const RepositoryItem = ({
 					<div>
 						{owner && (
 							<span>
-								Owner: <Link href={owner.url}>{owner.login}</Link>
+								Owner - <Link href={owner.url}>{owner.login}</Link>
 							</span>
 						)}
 					</div>
