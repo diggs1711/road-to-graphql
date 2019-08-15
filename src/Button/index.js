@@ -7,4 +7,12 @@ const Button = ({ children, className, color = 'black', type = 'button', ...prop
 	</button>
 );
 
+const ButtonUnobtrusive = ({ children, className, type = 'Button', ...props }) => (
+	<button className={`${className} Button_unobtrusive`} type={type} {...props}>
+		{children}
+	</button>
+);
+
+export { ButtonUnobtrusive };
+
 export default Button;

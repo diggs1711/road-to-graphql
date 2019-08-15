@@ -5,7 +5,7 @@ import { useMutation } from 'react-apollo';
 import Button from '../../Button';
 
 import { STAR_REPO, REMOVE_STAR, UPDATE_SUBSCRIPTION } from '../mutations';
-import { REPOSITORY_FRAGMENT } from '..';
+import REPOSITORY_FRAGMENT from '../fragments';
 
 const RepositoryItem = ({
 	id,
@@ -42,6 +42,16 @@ const RepositoryItem = ({
 					}
 				}
 			});
+		},
+		optimisticResponse: {
+			addStar: {
+				__typename: 'Mutation',
+				starrable: {
+					__typename: 'Repository',
+					id,
+					viewerHasStarred: true
+				}
+			}
 		}
 	});
 	const [
@@ -67,6 +77,16 @@ const RepositoryItem = ({
 					}
 				}
 			});
+		},
+		optimisticResponse: {
+			removeStar: {
+				__typename: 'Mutation',
+				starrable: {
+					__typename: 'Repository',
+					id,
+					viewerHasStarred: false
+				}
+			}
 		}
 	});
 
@@ -79,7 +99,6 @@ const RepositoryItem = ({
 				id: `Repository:${id}`,
 				fragment: REPOSITORY_FRAGMENT
 			});
-			console.log(cache);
 
 			const totalCount =
 				viewerSubscription === 'UNSUBSCRIBED'
@@ -97,10 +116,20 @@ const RepositoryItem = ({
 					}
 				}
 			});
+		},
+		optimisticResponse: {
+			updateSubscription: {
+				__typename: 'Mutation',
+				subscribable: {
+					__typename: 'Repository',
+					id,
+					viewerSubscription:
+						viewerSubscription === 'UNSUBSCRIBED' ? 'SUBSCRIBED' : 'UNSUBSCRIBED'
+				}
+			}
 		}
 	});
 
-	// const updateStar = ()
 	return (
 		<div>
 			<div className="RepositoryItem-title">
